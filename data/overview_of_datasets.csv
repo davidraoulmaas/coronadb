@@ -1,3 +1,5 @@
 name	status	source	description	license
 bev	2	regionaldatenbank/genesis	Bevoelkerung nach Altersklasse auf Kreisebene (Stand 2018)	dl-de-by-2.0
-pflegebed	2	regionaldatenbank/genesis	Pflegebedüftige/Pflegegeldempfänger nach Kreis	dl-de-by-2.0
+pflegebed	2	regionaldatenbank/genesis	Pflegebeduerftige/Pflegegeldempfaenger nach Kreis	dl-de-by-2.0
+krankenh	2	regionaldatenbank/genesis	Informationen ueber Krankenhauszahl und Bettenkapazitaeten nach Abteilung per Kreis (2018)	dl-de-by-2.0
+intensiv	2	DIVI Intensivregister	Anzahl Intensivkliniken pro PLZ	erhoben von divi.de
