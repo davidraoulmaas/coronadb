@@ -10,6 +10,7 @@ import os
 import argparse
 import numpy as np
 from tqdm import tqdm
+import math
 
 
 def preproc_covid_df():
@@ -94,9 +95,18 @@ def preproc_covariates():
 
 
 def create_zeros_df(df_covs, df):
+    """
+    Create DF that contains values for all 'Landkreise'/districts and each timestep (day).
+    That is, all the places where there are 0 cases are now also available, together with the covariates.
+    In addition, the cumulative cases are counted.
+    :param df_covs:
+    :param df:
+    :return:
+    """
     first_day, last_day = df["Meldedatum"].min(), df["Meldedatum"].max()
     date_range = pd.date_range(first_day, last_day)
 
+    # add zeros
     new_df_l = []
     for index, row in tqdm(df_covs.reset_index().iterrows()):
         for date in date_range:
@@ -108,7 +118,32 @@ def create_zeros_df(df_covs, df):
     df_withzeros = pd.merge(df, df_covs_alltimes, how='right', on=['krs', 'Meldedatum'])
     df_withzeros["AnzahlFall"].fillna(0, inplace=True)
     df_withzeros["AnzahlTodesfall"].fillna(0, inplace=True)
-    return df_withzeros.sort_values(["krs", "Meldedatum"])
+
+    # Now add cumulative counts of cases and deaths
+    print("Calculating cumulative cases")
+    df_withzeros["cum_AnzahlFall"] = 0
+    df_withzeros["cum_AnzahlTodesfall"] = 0
+
+    lks = df_withzeros["krs"].unique()
+    dates = np.sort(df_withzeros["Meldedatum"].unique())
+
+    for lk in tqdm(lks):
+        count = 0.
+        count_deaths = 0.
+        for date in dates:
+            idx_krs = df_withzeros["krs"] == lk
+            idx_date = df_withzeros["Meldedatum"] == date
+            row_idx = idx_krs & idx_date
+
+            count += df_withzeros.loc[row_idx, "AnzahlFall"].iloc[0]
+            count_deaths += df_withzeros.loc[row_idx, "AnzahlTodesfall"].iloc[0]
+
+            df_withzeros.loc[row_idx, "cum_AnzahlFall"] = count
+            df_withzeros.loc[row_idx, "cum_AnzahlTodesfall"] = count_deaths
+    colnames = list(df_withzeros.columns)
+    new_col_order = colnames[:4] + colnames[-2:] + colnames[4:-2]
+
+    return df_withzeros[new_col_order].sort_values(["krs", "Meldedatum"])
 
 
 def main():
@@ -125,7 +160,7 @@ def main():
     #  up till now only for the one without age groups.. Because it's kinda tedious
     print("Creating CSV with zeros")
     df_withzeros = create_zeros_df(df_covs, dfs[-1])
-    df_withzeros.to_csv(target_p / "covid_merged_by_lk_withzeros.csv")
+    df_withzeros.to_csv(target_p / "covid_merged_by_lk_withzeros_cumulative.csv")
 
 
 if __name__ == '__main__':
