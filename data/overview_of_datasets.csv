@@ -1,1 +1,3 @@
 name	status	source	description	license
+bev	2	regionaldatenbank/genesis	Bevoelkerung nach Altersklasse auf Kreisebene (Stand 2018)	dl-de-by-2.0
+pflegebed	2	regionaldatenbank/genesis	Pflegebedüftige/Pflegegeldempfänger nach Kreis	dl-de-by-2.0
