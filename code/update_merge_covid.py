@@ -61,7 +61,7 @@ def main():
 
     for df, fn in zip(dfs, filenames):
         df_merged = df.join(df_covs, on='krs')
-        df_merged.to_csv(target_p / fn)
+        df_merged.to_csv(target_p / fn, index=False)
         print(f"Created file: '{target_p / fn}'")
 
 
