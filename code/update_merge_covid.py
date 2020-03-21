@@ -26,16 +26,18 @@ def preproc_covid_df():
     df_covid.drop("IdLandkreis", axis=1, inplace=True)
     df_covid.set_index("krs", inplace=True)
 
+    required_columns = ["krs", "Bundesland", "Landkreis", "Meldedatum"]
+
     # covid grouped by landkreis and age group
-    df_covid_byage = df_covid.groupby(["krs", "Bundesland", "Landkreis", "Altersgruppe"])[
+    df_covid_byage = df_covid.groupby(required_columns + ["Altersgruppe"])[
         ["AnzahlFall", "AnzahlTodesfall"]].sum().reset_index()
 
     # covid grouped by landkreis and gender
-    df_covid_bysex = df_covid.groupby(["krs", "Bundesland", "Landkreis", "Geschlecht"])[
+    df_covid_bysex = df_covid.groupby(required_columns + ["Geschlecht"])[
         ["AnzahlFall", "AnzahlTodesfall"]].sum().reset_index()
 
     # covid grouped by landkreis only
-    df_covid_bylk = df_covid.groupby(["krs", "Bundesland", "Landkreis"])[
+    df_covid_bylk = df_covid.groupby(required_columns)[
         ["AnzahlFall", "AnzahlTodesfall"]].sum().reset_index()
 
     dfs = [df_covid_byage, df_covid_bysex, df_covid_bylk]
