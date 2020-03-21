@@ -1,2 +1,6 @@
 name	status	source	description	license
+bev	2	regionaldatenbank/genesis	Bevoelkerung nach Altersklasse auf Kreisebene (Stand 2018)	dl-de-by-2.0
+pflegebed	2	regionaldatenbank/genesis	Pflegebeduerftige/Pflegegeldempfaenger nach Kreis	dl-de-by-2.0
+krankenh	2	regionaldatenbank/genesis	Informationen ueber Krankenhauszahl und Bettenkapazitaeten nach Abteilung per Kreis (2018)	dl-de-by-2.0
+intensiv	2	DIVI Intensivregister	Anzahl Intensivkliniken pro PLZ	erhoben von divi.de
 apotheken_openstreetmap.csv	1	https://npgeo-corona-npgeo-de.hub.arcgis.com/datasets/2a1d004868664b56944fba3564d7ae26_0?geometry=-18.840%2C46.314%2C39.783%2C55.922'	Geodata of German pharmacies from 17.03.2020 as point representations	ODbL
