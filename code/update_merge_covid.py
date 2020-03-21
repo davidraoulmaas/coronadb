@@ -10,9 +10,11 @@ import os
 import argparse
 
 
-def main():
-    # df_plz = pd.read_csv(plz_p).drop(["place", "state", "state_code", "country_code", "province", "province_code",
-    #                                   "latitude", "longitude"], axis=1)
+def preproc_covid_df():
+    """
+    Load & Preprocess covid19 case counts.
+    :return: List of dataframes, and list of filenames where they should be saved after merging
+    """
     df_covid = pd.read_csv(covid_p, dtype={"IdLandkreis": 'str'})
 
     # remove entries that don't have any location..
@@ -36,6 +38,19 @@ def main():
     df_covid_bylk = df_covid.groupby(["krs", "Bundesland", "Landkreis"])[
         ["AnzahlFall", "AnzahlTodesfall"]].sum().reset_index()
 
+    dfs = [df_covid_byage, df_covid_bysex, df_covid_bylk]
+    filenames = ["covid_merged_byage.csv", "covid_merged_bysex.csv", "covid_merged_bylk.csv"]
+
+    return dfs, filenames
+
+
+def preproc_covariates():
+    """
+    Load & Preprocess Covariate data.
+    :return: Dataframe consisting of all merged data, with 'krs' as index
+    """
+    # df_plz = pd.read_csv(plz_p).drop(["place", "state", "state_code", "country_code", "province", "province_code",
+    #                                   "latitude", "longitude"], axis=1)
     df_bev = pd.read_csv(bev_p, encoding='ISO-8859-1', dtype={"krs": 'int'}).set_index("krs").drop("name", axis=1)
     df_kh = pd.read_csv(kh_p, encoding='ISO-8859-1', dtype={"krs": 'int'}).set_index("krs").drop("name", axis=1)
     df_pflegebed = pd.read_csv(pflegebed_p, encoding='ISO-8859-1',
@@ -58,9 +73,14 @@ def main():
     df_covs = df_covs.join(df_intensiv.add_prefix("intensiv_"), on='krs')
     df_covs = df_covs.join(df_lk_area.add_prefix("lk_"), on='krs')
 
-    dfs = [df_covid_byage, df_covid_bysex, df_covid_bylk]
-    filenames = ["covid_merged_byage.csv", "covid_merged_bysex.csv", "covid_merged_bylk.csv"]
+    return df_covs
 
+
+def main():
+    df_covs = preproc_covariates()
+    dfs, filenames = preproc_covid_df()
+
+    # merge the different covid dataframes with the covariates.
     for df, fn in zip(dfs, filenames):
         df_merged = df.join(df_covs, on='krs')
         df_merged.to_csv(target_p / fn, index=False)
