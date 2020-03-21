@@ -32,16 +32,27 @@ def preproc_covid_df():
     df_covid_byage = df_covid.groupby(required_columns + ["Altersgruppe"])[
         ["AnzahlFall", "AnzahlTodesfall"]].sum().reset_index()
 
-    # covid grouped by landkreis and gender
+    # covid grouped by landkreis and sex
     df_covid_bysex = df_covid.groupby(required_columns + ["Geschlecht"])[
+        ["AnzahlFall", "AnzahlTodesfall"]].sum().reset_index()
+
+    # covid grouped by landkreis, sex + age group
+    df_covid_bysex_age = df_covid.groupby(required_columns + ["Altersgruppe", "Geschlecht"])[
         ["AnzahlFall", "AnzahlTodesfall"]].sum().reset_index()
 
     # covid grouped by landkreis only
     df_covid_bylk = df_covid.groupby(required_columns)[
         ["AnzahlFall", "AnzahlTodesfall"]].sum().reset_index()
 
-    dfs = [df_covid_byage, df_covid_bysex, df_covid_bylk]
-    filenames = ["covid_merged_byage.csv", "covid_merged_bysex.csv", "covid_merged_bylk.csv"]
+    dfs = [df_covid_byage,
+           df_covid_bysex,
+           df_covid_bysex_age,
+           df_covid_bylk]
+
+    filenames = ["covid_merged_by_age.csv",
+                 "covid_merged_by_sex.csv",
+                 "covid_merged_by_sex_age.csv",
+                 "covid_merged_by_lk.csv"]
 
     return dfs, filenames
 
