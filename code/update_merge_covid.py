@@ -38,11 +38,12 @@ def main():
 
     df_bev = pd.read_csv(bev_p, encoding='ISO-8859-1', dtype={"krs": 'int'}).set_index("krs").drop("name", axis=1)
     df_kh = pd.read_csv(kh_p, encoding='ISO-8859-1', dtype={"krs": 'int'}).set_index("krs").drop("name", axis=1)
-    df_pflegebed = pd.read_csv(pflegebed_p, encoding='ISO-8859-1', dtype={"krs": 'int'}).set_index("krs").drop("name",
-                                                                                                               axis=1)
+    df_pflegebed = pd.read_csv(pflegebed_p, encoding='ISO-8859-1',
+                               dtype={"krs": 'int'}).set_index("krs").drop("name", axis=1)
+    df_lk_area = pd.read_csv(lk_area_p).set_index("krs").drop(["hasc_2", "bundesland", "name"], axis=1)
+
     df_intensiv_byplz = pd.read_csv(intensiv_p, encoding='ISO-8859-1', dtype={"krs": 'int'}).set_index("krs").drop(
-        "land",
-        axis=1)
+        "land", axis=1)
     # Pandas is weird, the reset_indx->set_idx is necessary for the join
     df_intensiv = df_intensiv_byplz.groupby(["krs"])["intensivkliniken"].sum().reset_index().set_index("krs")
 
@@ -55,6 +56,7 @@ def main():
     df_covs = df_covs.join(df_kh.add_prefix("kh_"), on='krs')
     df_covs = df_covs.join(df_pflegebed.add_prefix("pflegebed_"), on='krs')
     df_covs = df_covs.join(df_intensiv.add_prefix("intensiv_"), on='krs')
+    df_covs = df_covs.join(df_lk_area.add_prefix("lk_"), on='krs')
 
     dfs = [df_covid_byage, df_covid_bysex, df_covid_bylk]
     filenames = ["covid_merged_byage.csv", "covid_merged_bysex.csv", "covid_merged_bylk.csv"]
@@ -80,6 +82,7 @@ if __name__ == '__main__':
     kh_p = proj_dir / 'data/01_raw_data/krankenh.csv'
     pflegebed_p = proj_dir / 'data/01_raw_data/pflegebed.csv'
     intensiv_p = proj_dir / 'data/01_raw_data/intensiv.csv'
+    lk_area_p = proj_dir / 'data/02_pre_processed/landkreis_areas.csv'
 
     # files with PLZ key
     hochschulen_p = proj_dir / 'data/01_raw_data/numhochschulen_per_plz.csv'
