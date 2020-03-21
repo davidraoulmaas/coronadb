@@ -8,6 +8,8 @@ import pandas as pd
 from pathlib import Path
 import os
 import argparse
+import numpy as np
+from tqdm import tqdm
 
 
 def preproc_covid_df():
@@ -21,12 +23,14 @@ def preproc_covid_df():
     df_covid = df_covid[df_covid["IdLandkreis"] != '0-1']
     df_covid = df_covid[~df_covid["IdLandkreis"].isna()]
 
+    df_covid["Meldedatum"] = pd.to_datetime(pd.to_datetime(df_covid["Meldedatum"]).dt.date)
+
     # the krs data already truncated the ids to ints, so also do this for the covid data
     df_covid["krs"] = df_covid["IdLandkreis"].astype("int")
     df_covid.drop("IdLandkreis", axis=1, inplace=True)
     df_covid.set_index("krs", inplace=True)
 
-    required_columns = ["krs", "Bundesland", "Landkreis", "Meldedatum"]
+    required_columns = ["krs", "Meldedatum"]
 
     # covid grouped by landkreis and age group
     df_covid_byage = df_covid.groupby(required_columns + ["Altersgruppe"])[
@@ -68,7 +72,7 @@ def preproc_covariates():
     df_kh = pd.read_csv(kh_p, encoding='ISO-8859-1', dtype={"krs": 'int'}).set_index("krs").drop("name", axis=1)
     df_pflegebed = pd.read_csv(pflegebed_p, encoding='ISO-8859-1',
                                dtype={"krs": 'int'}).set_index("krs").drop("name", axis=1)
-    df_lk_area = pd.read_csv(lk_area_p).set_index("krs").drop(["hasc_2", "bundesland", "name"], axis=1)
+    df_lk_area = pd.read_csv(lk_area_p).set_index("krs")  # .drop(["hasc_2", "bundesland", "name"], axis=1)
 
     df_intensiv_byplz = pd.read_csv(intensiv_p, encoding='ISO-8859-1', dtype={"krs": 'int'}).set_index("krs").drop(
         "land", axis=1)
@@ -89,15 +93,39 @@ def preproc_covariates():
     return df_covs
 
 
+def create_zeros_df(df_covs, df):
+    first_day, last_day = df["Meldedatum"].min(), df["Meldedatum"].max()
+    date_range = pd.date_range(first_day, last_day)
+
+    new_df_l = []
+    for index, row in tqdm(df_covs.reset_index().iterrows()):
+        for date in date_range:
+            row_dict = dict(row)
+            row_dict["Meldedatum"] = date
+
+            new_df_l.append(row_dict)
+    df_covs_alltimes = pd.DataFrame(new_df_l)
+    df_withzeros = pd.merge(df, df_covs_alltimes, how='right', on=['krs', 'Meldedatum'])
+    df_withzeros["AnzahlFall"].fillna(0, inplace=True)
+    df_withzeros["AnzahlTodesfall"].fillna(0, inplace=True)
+    return df_withzeros.sort_values(["krs", "Meldedatum"])
+
+
 def main():
     df_covs = preproc_covariates()
     dfs, filenames = preproc_covid_df()
 
     # merge the different covid dataframes with the covariates.
     for df, fn in zip(dfs, filenames):
-        df_merged = df.join(df_covs, on='krs')
+        df_merged = df.join(df_covs, on=['krs'])
         df_merged.to_csv(target_p / fn, index=False)
         print(f"Created file: '{target_p / fn}'")
+
+    # create dataset that also contains the zeros (ie no cases) with corresponding covariates
+    #  up till now only for the one without age groups.. Because it's kinda tedious
+    print("Creating CSV with zeros")
+    df_withzeros = create_zeros_df(df_covs, dfs[-1])
+    df_withzeros.to_csv(target_p / "covid_merged_by_lk_withzeros.csv")
 
 
 if __name__ == '__main__':
