@@ -1,11 +1,16 @@
 # coronadb
 
-Upon adding a csv please run the script in `code/submit_dataset_info.py` to update the list of all datasets in this repo.
+### About
+The repository provides up-to-date COVID-19 Data in Germany on the resolution of Districts ('Landkreise').
+This includes information such as the number of hospital, census data and others (for more info, see below). In addition,  centroid coordinates (lon, lat) of the districts, their total area, and projected ([epsg:5243](https://epsg.io/5243)) coordinates are provided, which could be directly used for Statistical Models that model spatial correlations based on distances.
+
+The COVID-19 case data will be updated daily.
+
 ### Merged Data
-In `data/03_integrated_data` you can find the final CSVs,
-which are all COVID-19 data merged with the different covariates we obtained for each landkreis.
+The final CSVs are available here: [Google Drive](https://drive.google.com/drive/folders/1Vsf20J75hAJ6EmgM6yRjsRpyLKqvZhmJ?usp=sharing)
+All CSVs include COVID-19 data merged with the different covariates we obtained for each district ('Landkreis').
 However, the final CSVs are in different resolutions in respect to age & sex of the infected.
-In addition, one data set includes the cumulative case & death counts for each Landkreis to each point of time (i.e. the full grid).
+In addition, one data set includes the cumulative case count & death counts for each Landkreis to each point of time (i.e. the full grid).
 
 |filename | description|
 |---|---|
@@ -27,3 +32,6 @@ In addition, one data set includes the cumulative case & death counts for each L
 |landkreise_areas|2|https://public.opendatasoft.com/explore/dataset/landkreise-in-germany|Landkreise, their centroids, and their area.|CC BY-NC-SA 4.0|
 |numhochschulen_per_plz|1|https://npgeo-corona-npgeo-de.hub.arcgis.com/datasets/379e258b9a004236a3ddeab031acbb98_0/|Anzahl Hochschulen  per Stadt/PLZ|ODbL|
 |zipcodes.de|1|https://github.com/zauberware/postal-codes-json-xml-csv/blob/master/data/DE/zipcodes.de.csv|PLZ und zugehörige Landkreisnummern|CC-BY-4.0|
+
+## Adding new CSVs
+Upon adding a csv please run the script in `code/submit_dataset_info.py` to update the list of all datasets in this repo.
