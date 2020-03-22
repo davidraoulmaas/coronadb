@@ -55,7 +55,7 @@ def main():
             continue
 
     df_lks = pd.DataFrame(dict_list).set_index("krs").sort_index()
-    df_lks.to_csv(proj_dir / "data/02_pre_processed/landkreis_areas.csv")
+    df_lks.to_csv(proj_dir / "data/02_pre_processed/landkreis_areas.csv", encoding='utf-8')
 
 
 if __name__ == '__main__':
