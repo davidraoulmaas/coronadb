@@ -133,3 +133,37 @@ zipcodes.de
     community_code:     Kreiskennziffer
     latitude
     longitude
+
+INKAR_strukturdaten
+    krs 
+    raumeinheit
+    aggregat
+    apotheken_2017
+    krankenhausbetten_2016
+    pflegebedürftige_2017
+    ambulante_pflege_2017
+    stationäre_pflege_2017
+    empfänger_von_pflegegeld_2017
+    personal_in_pflegeheimen_2017
+    personal_in_pflegediensten_2017
+    pflegeheimplätze_2017
+    betreuungsquote_kleinkinder_2017
+    siedlungsdichte_2017
+    freifläche_je_einwohner_2017
+    waldfläche_je_einwohner_2017
+    wasserfläche_je_einwohner_2017
+    einwohnerdichte_2017
+    einpendler_2017
+    auspendler_2017
+    pendler_mit_arbeitsweg_50_km_und_mehr_2017
+    pendler_mit_arbeitsweg_150_km_und_mehr_2017
+    pendler_mit_arbeitsweg_300_km_und_mehr_2017
+    erreichbarkeit_von_autobahnen_2018
+    erreichbarkeit_von_flughäfen_2018
+    erreichbarkeit_von_ic_ec_ice_bahnhöfen_2018
+    erreichbarkeit_von_oberzentren_2018
+    erreichbarkeit_von_mittelzentren_2018
+    nahversorgung_supermärkte_durchschnittsdistanz_2017
+    nahversorgung_supermärkte_anteil_der_bev__1km_radius_2017
+    nahversorgung_apotheken_durchschnittsdistanz_2017
+    nahversorgung_apotheken_anteil_der_bev__1km
