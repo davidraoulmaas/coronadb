@@ -90,7 +90,9 @@ def preproc_covariates():
     df_covs = df_covs.join(df_pflegebed.add_prefix("pflegebed_"), on='krs')
     df_covs = df_covs.join(df_intensiv.add_prefix("intensiv_"), on='krs')
     df_covs = df_covs.join(df_lk_area.add_prefix("lk_"), on='krs')
-    breakpoint()
+
+    # all codes must consist of 5 numbers, longer ones are cities
+    df_covs = df_covs[df_covs.index<1e6]
 
     return df_covs
 
