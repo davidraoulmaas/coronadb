@@ -8,3 +8,4 @@ landkreise_areas	2	https://public.opendatasoft.com/explore/dataset/landkreise-in
 numhochschulen_per_plz	1	https://npgeo-corona-npgeo-de.hub.arcgis.com/datasets/379e258b9a004236a3ddeab031acbb98_0/	Anzahl Hochschulen  per Stadt/PLZ	ODbL
 zipcodes.de	1	https://github.com/zauberware/postal-codes-json-xml-csv/blob/master/data/DE/zipcodes.de.csv	PLZ und zugeh√∂rige Landkreisnummern	CC-BY-4.0
 covid_cases_ger_rki	1	https://opendata.arcgis.com/datasets/dd4580c810204019a7b8eb3e0b329dd6_0.csv	Covid-19 infections in Germany by date, daily data updated by Robert Koch Institute	Bundesamt f√ºr Kartographie und Geod√§sieRobert Koch-Institut
+INKAR Strukturdaten	1	https://www.inkar.de/	Indikatoren und Karten zur Raum- und Stadtentwicklungen - INKAR online ñ Datenbank/Karten zur Raum- und Stadtentwicklung/ Lebensbedingungen uvm. des BBSR	Datenlizenz Deutschland ñ Namensnennung ñ Version 2.0
