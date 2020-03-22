@@ -25,9 +25,9 @@ In addition, one data set includes the cumulative case count & death counts for 
 (see `data/overview_of_datasets.csv` for an up-to-date version)
 |name|status|source|description|license|
 |--- |---|---|---|---|
-|bev|2|[regionaldatenbank/genesis Code: 12411-02-03-4](https://www.regionalstatistik.de/genesis/online/logon)|Population by Age brackets and 'Landkreis' (2018-12-31)|[dl-de-by-2.0](https://www.govdata.de/dl-de/by-2-0)|
-|pflegebed|2|[regionaldatenbank/genesis: Code 22411-02-04-4](https://www.regionalstatistik.de/genesis/online/logon)| Number of people in need of care and currently under care, by 'Landkreis'|[dl-de-by-2.0](https://www.govdata.de/dl-de/by-2-0)|
-|krankenh|2|[regionaldatenbank/genesis: Code 23111-01-04-4](https://www.regionalstatistik.de/genesis/online/logon)|Information about number of hospitals and bed capacities by 'Landkreis' (2018)|[dl-de-by-2.0](https://www.govdata.de/dl-de/by-2-0)|
+|bev|1|[regionaldatenbank/genesis Code: 12411-02-03-4](https://www.regionalstatistik.de/genesis/online/logon)|Population by Age brackets and 'Landkreis' (2018-12-31)|[dl-de-by-2.0](https://www.govdata.de/dl-de/by-2-0)|
+|pflegebed|1|[regionaldatenbank/genesis: Code 22411-02-04-4](https://www.regionalstatistik.de/genesis/online/logon)| Number of people in need of care and currently under care, by 'Landkreis'|[dl-de-by-2.0](https://www.govdata.de/dl-de/by-2-0)|
+|krankenh|1|[regionaldatenbank/genesis: Code 23111-01-04-4](https://www.regionalstatistik.de/genesis/online/logon)|Information about number of hospitals and bed capacities by 'Landkreis' (2018)|[dl-de-by-2.0](https://www.govdata.de/dl-de/by-2-0)|
 |landkreise_areas|2|[opendatasoft](https://public.opendatasoft.com/explore/dataset/landkreise-in-germany)|Information about Districts ('Landkreise') including coordinates & areas.|[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)|
 |numhochschulen_per_plz|1|[npgeo corona](https://npgeo-corona-npgeo-de.hub.arcgis.com/datasets/379e258b9a004236a3ddeab031acbb98_0/)| Number of colleges & universities by community/city ('PLZ')|[ODbL](https://opendatacommons.org/licenses/odbl/index.html)|
 |zipcodes.de|1|[github:zauberware/postal-codes-json-xml-csv](https://github.com/zauberware/postal-codes-json-xml-csv/blob/master/data/DE/zipcodes.de.csv)|Town/Community Code ('PLZ') and corresponding district code ('Kreisnummer' belonging to 'Landkreis')|[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)|
