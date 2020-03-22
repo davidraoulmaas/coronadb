@@ -26,9 +26,9 @@ In addition, one data set includes the cumulative case count & death counts for 
 (see `data/overview_of_datasets.csv` for an up-to-date version)
 |name|status|source|description|license|
 |--- |---|---|---|---|
-|bev|2|regionaldatenbank/genesis|Bevoelkerung nach Altersklasse auf Kreisebene (Stand 2018)|[dl-de-by-2.0](https://www.govdata.de/dl-de/by-2-0)|
-|pflegebed|2|regionaldatenbank/genesis|Pflegebeduerftige/Pflegegeldempfaenger nach Kreis|[dl-de-by-2.0](https://www.govdata.de/dl-de/by-2-0)|
-|krankenh|2|regionaldatenbank/genesis|Informationen ueber Krankenhauszahl und Bettenkapazitaeten nach Abteilung per Kreis (2018)|[dl-de-by-2.0](https://www.govdata.de/dl-de/by-2-0)|
+|bev|2|[regionaldatenbank/genesis](https://www.regionalstatistik.de/genesis/online/logon)|Bevoelkerung nach Altersklasse auf Kreisebene (Stand 2018)|[dl-de-by-2.0](https://www.govdata.de/dl-de/by-2-0)|
+|pflegebed|2|[regionaldatenbank/genesis](https://www.regionalstatistik.de/genesis/online/logon)|Pflegebeduerftige/Pflegegeldempfaenger nach Kreis|[dl-de-by-2.0](https://www.govdata.de/dl-de/by-2-0)|
+|krankenh|2|[regionaldatenbank/genesis](https://www.regionalstatistik.de/genesis/online/logon)|Informationen ueber Krankenhauszahl und Bettenkapazitaeten nach Abteilung per Kreis (2018)|[dl-de-by-2.0](https://www.govdata.de/dl-de/by-2-0)|
 |landkreise_areas|2|[opendatasoft](https://public.opendatasoft.com/explore/dataset/landkreise-in-germany)|Landkreise, their centroids, and their area.|[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)|
 |numhochschulen_per_plz|1|[npgeo corona](https://npgeo-corona-npgeo-de.hub.arcgis.com/datasets/379e258b9a004236a3ddeab031acbb98_0/)|Anzahl Hochschulen  per Stadt/PLZ|[ODbL](https://opendatacommons.org/licenses/odbl/index.html)|
 |zipcodes.de|1|[github:zauberware/postal-codes-json-xml-csv](https://github.com/zauberware/postal-codes-json-xml-csv/blob/master/data/DE/zipcodes.de.csv)|PLZ und zugehörige Landkreisnummern|[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)|
