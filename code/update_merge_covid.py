@@ -153,14 +153,14 @@ def main():
     # merge the different covid dataframes with the covariates.
     for df, fn in zip(dfs, filenames):
         df_merged = df.join(df_covs, on=['krs'])
-        df_merged.to_csv(target_p / fn, index=False)
+        df_merged.to_csv(target_p / fn, index=False, encoding='utf-8')
         print(f"Created file: '{target_p / fn}'")
 
     # create dataset that also contains the zeros (ie no cases) with corresponding covariates
     #  up till now only for the one without age groups.. Because it's kinda tedious
     print("Creating CSV with zeros")
     df_withzeros = create_zeros_df(df_covs, dfs[-1])
-    df_withzeros.to_csv(target_p / "covid_merged_by_lk_withzeros_cumulative.csv")
+    df_withzeros.to_csv(target_p / "covid_merged_by_lk_withzeros_cumulative.csv", encoding='utf-8')
 
 
 if __name__ == '__main__':
