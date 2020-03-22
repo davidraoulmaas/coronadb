@@ -97,7 +97,7 @@ def init_corona_db(cred, path):
     con.close()
 
 
-main_dir = Path(__file__).absolute().parent.parent
+main_dir = Path(__file__).absolute().parent.parent.parent
 zip_p = Path.joinpath(main_dir, 'data', '01_raw_data', 'zipcodes.de.csv')
 cred = get_credentials()
 create_corona_db(cred)
