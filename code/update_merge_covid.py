@@ -75,20 +75,20 @@ def preproc_covariates():
                                dtype={"krs": 'int'}).set_index("krs").drop("name", axis=1)
     df_lk_area = pd.read_csv(lk_area_p).set_index("krs")  # .drop(["hasc_2", "bundesland", "name"], axis=1)
 
-    df_intensiv_byplz = pd.read_csv(intensiv_p, dtype={"krs": 'int'}).set_index("krs").drop(
-        "land", axis=1)
-    # Pandas is weird, the reset_indx->set_idx is necessary for the join
-    df_intensiv = df_intensiv_byplz.groupby(["krs"])["intensivkliniken"].sum().reset_index().set_index("krs")
-
-    # NAs are where no clinics exist -> 0
-    df_intensiv = df_intensiv.fillna(0)
+    # df_intensiv_byplz = pd.read_csv(intensiv_p, dtype={"krs": 'int'}).set_index("krs").drop(
+    #     "land", axis=1)
+    # # Pandas is weird, the reset_indx->set_idx is necessary for the join
+    # df_intensiv = df_intensiv_byplz.groupby(["krs"])["intensivkliniken"].sum().reset_index().set_index("krs")
+    #
+    # # NAs are where no clinics exist -> 0
+    # df_intensiv = df_intensiv.fillna(0)
 
     # TODO: Hochschulen..
     # df_hs_byplz = pd.read_csv(hochschulen_p)
     df_covs = df_bev.add_prefix("bev_")
     df_covs = df_covs.join(df_kh.add_prefix("kh_"), on='krs')
     df_covs = df_covs.join(df_pflegebed.add_prefix("pflegebed_"), on='krs')
-    df_covs = df_covs.join(df_intensiv.add_prefix("intensiv_"), on='krs')
+    # df_covs = df_covs.join(df_intensiv.add_prefix("intensiv_"), on='krs')
     df_covs = df_covs.join(df_lk_area.add_prefix("lk_"), on='krs')
 
     # all codes must consist of 5 numbers, longer ones are cities
@@ -179,7 +179,7 @@ if __name__ == '__main__':
     bev_p = proj_dir / 'data/01_raw_data/bev.csv'
     kh_p = proj_dir / 'data/01_raw_data/krankenh.csv'
     pflegebed_p = proj_dir / 'data/01_raw_data/pflegebed.csv'
-    intensiv_p = proj_dir / 'data/01_raw_data/intensiv.csv'
+    # intensiv_p = proj_dir / 'data/01_raw_data/intensiv.csv'
     lk_area_p = proj_dir / 'data/02_pre_processed/landkreis_areas.csv'
 
     # files with PLZ key
