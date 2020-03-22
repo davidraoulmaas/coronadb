@@ -1,0 +1,135 @@
+apotheken_openstreetmap:
+    X
+    Y
+    name
+    amenity
+    healthcare
+    healthcare_speciality 
+    operator
+    operator_type
+    contact_phone
+    contact_website
+    contact_email
+    contact_fax
+    addr
+    address_full
+    address_street
+    address_housenumber
+    address_postcode
+    address_city
+    address_housename
+    address_suburb
+    address_subdistrict
+    address_district
+    address_province
+    address_state
+    denomination
+    religion
+    emergency
+    rooms
+    beds
+    capacity
+    wheelchair
+    wikidata
+    wikipedia
+    ORIG_FID
+    GlobalID
+
+bev:
+    krs:        Kreiskennziffer
+    name:       Landkreis
+    A00-02:     Anzahl Individuen zwischen 0 und 2 Jahren
+    A03-05
+    A06-09
+    A10-14
+    A15-17
+    A18-19
+    A20-24
+    A25-29
+    A30-34
+    A35-39
+    A40-44
+    A45-49
+    A50-54
+    A55-59
+    A60-64
+    A65-74
+    A75-open
+    Insgesamt:  Gesamtbevölkerung
+    land:       Länderkürzel
+
+covid_cases_ger_rki:
+    IdBundesland
+    Bundesland
+    Landkreis
+    Altersgruppe
+    Geschlecht
+    AnzahlFall
+    AnzahlTodesfall
+    ObjectId
+    Meldedatum
+    IdLandkreis
+    Datenstand
+
+intensiv:
+    plz:                Postleitzahl
+    intensivkliniken:   Anzahl Intensivkliniken
+    land:               Länderkürzel
+    krs:                Kreiskennziffer
+
+krankenh:
+    krs:            Kreiskennziffer
+    name:           Landkreis
+    krankenh:       Anzahl Krankenhäuser
+    betten:         Anzahl Krankenhausbetten
+    augen:          Anzahl Krankenhausbetten Fachabteilung Augen
+    chirurgie       s.o.
+    frauen
+    hno
+    haut
+    innere_medizin
+    geriatrie
+    kinder
+    neurologie
+    orthopaedie
+    urologie
+    sonstige
+    land            Länderkürzel
+
+numhochschulen_per_plz:
+    plz:                Postleitzahl
+    num_hochschulen:    Anzahl Hochschulen
+
+pflegebed:
+    krs:                    Kreiskennziffer
+    name:                   Landkreis
+    pflegebeduerftige:      Anzahl Pflegebedürftige
+    ambulant:               " ambulant Pflegeb.
+    vollstaendig:           " vollstaendig Pflegebed. 
+    pflegegeld_empfaenger:  " Pflegegekdempfänger
+    land:                   Länderkürzel
+
+RKI_COVID_19:
+    IdBundesland
+    Bundesland
+    Landkreis
+    Altersgruppe
+    Geschlecht
+    AnzahlFall
+    AnzahlTodesfall
+    ObjectId
+    Meldedatum
+    IdLandkreis:        Kreiskennziffer
+
+zipcodes.de
+    country_code:       Staatenkürzel (hier exkl. DE)
+    zipcode:            PLZ
+    place:              Gemeindename
+    state:              Bundesland
+    state_code:         Länderkürzel
+    province:           null
+    province_code:      null
+    community:          Landkreis
+    community_code:     Kreiskennziffer
+    latitude
+    longitude
