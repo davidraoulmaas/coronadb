@@ -2,7 +2,7 @@
 
 ### About
 The repository provides up-to-date COVID-19 Data **within Germany** on the resolution of Districts ('Landkreise').
-This includes information such as the number of hospital, census data and others (for more info, see below). In addition,  centroid coordinates (lon, lat) of the districts, their total area, and projected ([epsg:5243](https://epsg.io/5243)) coordinates are provided, which could be directly used for Statistical Models that model spatial correlations based on distances.
+This includes information such as the number of hospital, census data and others (for more info, see below). In addition,  centroid coordinates (lon, lat) of the districts, their total area, and projected ([epsg:5243](https://epsg.io/5243)) coordinates are provided.
 
 The COVID-19 case data will be updated daily.
 
