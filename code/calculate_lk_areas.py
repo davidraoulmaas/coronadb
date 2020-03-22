@@ -54,7 +54,11 @@ def main():
             print(f"Incomplete Row was skipped: \n{prop}")
             continue
 
-    df_lks = pd.DataFrame(dict_list).set_index("krs").sort_index()
+    df_lks = pd.DataFrame(dict_list).set_index("krs").sort_index().reset_index()
+
+    # Fix error in lk data set for Göttingen. ID should be 03159
+    idx = df_lks["krs"] == "03152"
+    df_lks.loc[idx, "krs"] = "03159"
     df_lks.to_csv(proj_dir / "data/02_pre_processed/landkreis_areas.csv", encoding='utf-8')
 
 
