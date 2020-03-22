@@ -7,7 +7,8 @@ This includes information such as the number of hospital, census data and others
 The COVID-19 case data will be updated daily.
 
 ### Merged Data
-The final CSVs are available here: [Google Drive](https://drive.google.com/drive/folders/1Vsf20J75hAJ6EmgM6yRjsRpyLKqvZhmJ?usp=sharing)
+The final CSVs are available via [Google Drive](https://drive.google.com/drive/folders/1Vsf20J75hAJ6EmgM6yRjsRpyLKqvZhmJ?usp=sharing).
+
 All CSVs include COVID-19 data merged with the different covariates we obtained for each district ('Landkreis').
 However, the final CSVs are in different resolutions in respect to age & sex of the infected.
 In addition, one data set includes the cumulative case count & death counts for each Landkreis to each point of time (i.e. the full grid).
