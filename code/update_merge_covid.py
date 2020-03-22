@@ -69,13 +69,13 @@ def preproc_covariates():
     """
     # df_plz = pd.read_csv(plz_p).drop(["place", "state", "state_code", "country_code", "province", "province_code",
     #                                   "latitude", "longitude"], axis=1)
-    df_bev = pd.read_csv(bev_p, encoding='ISO-8859-1', dtype={"krs": 'int'}).set_index("krs").drop("name", axis=1)
-    df_kh = pd.read_csv(kh_p, encoding='ISO-8859-1', dtype={"krs": 'int'}).set_index("krs").drop("name", axis=1)
-    df_pflegebed = pd.read_csv(pflegebed_p, encoding='ISO-8859-1',
+    df_bev = pd.read_csv(bev_p, dtype={"krs": 'int'}).set_index("krs").drop("name", axis=1)
+    df_kh = pd.read_csv(kh_p,  dtype={"krs": 'int'}).set_index("krs").drop("name", axis=1)
+    df_pflegebed = pd.read_csv(pflegebed_p,
                                dtype={"krs": 'int'}).set_index("krs").drop("name", axis=1)
     df_lk_area = pd.read_csv(lk_area_p).set_index("krs")  # .drop(["hasc_2", "bundesland", "name"], axis=1)
 
-    df_intensiv_byplz = pd.read_csv(intensiv_p, encoding='ISO-8859-1', dtype={"krs": 'int'}).set_index("krs").drop(
+    df_intensiv_byplz = pd.read_csv(intensiv_p, dtype={"krs": 'int'}).set_index("krs").drop(
         "land", axis=1)
     # Pandas is weird, the reset_indx->set_idx is necessary for the join
     df_intensiv = df_intensiv_byplz.groupby(["krs"])["intensivkliniken"].sum().reset_index().set_index("krs")
@@ -90,6 +90,7 @@ def preproc_covariates():
     df_covs = df_covs.join(df_pflegebed.add_prefix("pflegebed_"), on='krs')
     df_covs = df_covs.join(df_intensiv.add_prefix("intensiv_"), on='krs')
     df_covs = df_covs.join(df_lk_area.add_prefix("lk_"), on='krs')
+    breakpoint()
 
     return df_covs
 
@@ -160,8 +161,7 @@ def main():
     #  up till now only for the one without age groups.. Because it's kinda tedious
     print("Creating CSV with zeros")
     df_withzeros = create_zeros_df(df_covs, dfs[-1])
-    df_withzeros.to_csv(target_p / "covid_merged_by_lk_withzeros_cumulative.csv", encoding='utf-8')
-
+    df_withzeros.to_csv(target_p / "covid_merged_by_lk_withzeros_cumulative.csv", encoding='utf-8', index=False)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
