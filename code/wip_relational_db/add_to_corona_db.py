@@ -63,7 +63,7 @@ def add_table(path, id, cred):
 
 file = input('Add CSV: ')
 id = input('Id Variable: ')
-main_dir = Path(__file__).absolute().parent.parent
+main_dir = Path(__file__).absolute().parent.parent.parent
 file_p = Path.joinpath(main_dir, 'data', '01_raw_data', file)
 cred = get_credentials()
 add_table(file_p, id, cred)
