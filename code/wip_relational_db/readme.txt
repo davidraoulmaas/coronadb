@@ -5,10 +5,10 @@
         Password:       Passwort für postgres
         Port:           Lokaler Port; default: 5432
 
-add_to_corona_db:
+add_to_corona_db [files] [--auto-detect]:
+	files:		Eine oder mehrere CSVs aus dem raw-data-Ordner
+	--auto-detect	Aktiviert automatische Erkennung des geogr. Levels  
     Eingabe:
-        Add CSV:        Dateiname der csv im raw_data ordner
-        Id Variable:    Id für Daten Join; default: Id wird aus colnames erraten
         DB-Name:        Name der lokalen Corona Datenbank
         User Name:      Postgres-User-Name; default: postgres
         Password:       Passwort für postgres
@@ -16,6 +16,13 @@ add_to_corona_db:
     Für jede Spalte: 
         Bestätigung der Aufnahme in DB mit 'T'
         Data Type:      Datentyp der neuen Spalte
+
+update_corona_cases:
+    Eingabe:
+        DB-Name:        Name der lokalen Corona Datenbank
+        User Name:      Postgres-User-Name; default: postgres
+        Password:       Passwort für postgres
+        Port:           Lokaler Port; default: 5432
 
 
 DB Schema:

@@ -1,6 +1,7 @@
 import psycopg2
 import numpy as np
 import re
+import argparse
 from psycopg2.extensions import register_adapter, AsIs
 psycopg2.extensions.register_adapter(np.int64, psycopg2._psycopg.AsIs)
 from pathlib import Path
@@ -10,26 +11,22 @@ from pandas import read_csv
 def get_credentials():
     dbname = input('DB-Name: ')
     username = input('User Name: ')
-    if len(username) == 0: username = 'postgres'
     password = input('Password: ')
     port = input('Port: ')
+    if len(dbname) == 0: dbname = 'corona_db'
+    if len(username) == 0: username = 'postgres'
     if len(port) == 0: port = '5432'
     return {'dbname' : dbname, 'username' : username, 'password' : password, 'port' : port}
 
 
-def add_table(path, id, cred):
+def add_table(file, id, con):
     sql_add_column = 'ALTER TABLE %s\
         ADD %s %s;'
     sql_update = 'UPDATE %s\
         SET %s = %s\
         WHERE %s = %s'
-    con = psycopg2.connect(
-            dbname = cred['dbname'],
-            user= cred['username'], 
-            password = cred['password'],
-            port = cred['port'])
     cur = con.cursor()
-    data = read_csv(file_p)
+    data = read_csv(file)
     columns = data.columns  
     if id not in ['plz', 'krs', 'land', 'fall']: 
         id = 'NA'
@@ -41,7 +38,7 @@ def add_table(path, id, cred):
         elif 'land' in columns: 
             id = 'land'     
     if id == 'plz':
-        table = 'bezirk'
+        table = 'gebiet'
     elif id == 'krs': 
         table = 'kreis'
     elif id == 'land':
@@ -57,14 +54,37 @@ def add_table(path, id, cred):
             for i in range(len(data[col])):
                 if not np.isnan(data[col][i]):
                     cur.execute(sql_update % (table, col_, data[col][i], id, keys[i]))
+    cur.close()
+    return
+
+
+def main():
+    parser = argparse.ArgumentParser(description='Add CSVs to coronaDB.')
+    parser.add_argument('files', metavar='csv-files', nargs='+',
+                    help='files to add')
+    parser.add_argument('--auto-level', dest='auto_detect', metavar='auto-detect', action='store_const',
+                    const=True, default=False,
+                    help='auto-detect file resolution')
+    args = parser.parse_args()
+    main_dir = Path(__file__).absolute().parent.parent.parent
+    cred = get_credentials()
+    con = psycopg2.connect(
+            dbname = cred['dbname'],
+            user= cred['username'], 
+            password = cred['password'],
+            port = cred['port'])
+    for file in args.files:
+        if not file[-4:] == '.csv': file += '.csv'
+        file = Path.joinpath(main_dir, 'data', '01_raw_data', file)
+        if not args.auto_detect:
+            id = input('Id Variable: ')
+        else:
+            id = 'NA'
+        add_table(file, id, con)
     con.commit()
     con.close()
+    return
 
 
-file = input('Add CSV: ')
-id = input('Id Variable: ')
-main_dir = Path(__file__).absolute().parent.parent.parent
-file_p = Path.joinpath(main_dir, 'data', '01_raw_data', file)
-cred = get_credentials()
-add_table(file_p, id, cred)
-
+if __name__ == '__main__':
+    main()
